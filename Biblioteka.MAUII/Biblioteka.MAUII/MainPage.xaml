@@ -1,0 +1,63 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            
+             x:Class="Biblioteka.MAUII.MainPage">
+
+  
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Przyciski nawigacji -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" Padding="10">
+            <Button Text="Książki" Command="{Binding ShowBooksCommand}"/>
+            <Button Text="Kategorie" Command="{Binding ShowCategoriesCommand}"/>
+            <Button Text="Członkowie" Command="{Binding ShowMembersCommand}"/>
+            <Button Text="Wypożyczenia" Command="{Binding ShowBorrowsCommand}"/>
+            <Button Text="Odśwież" Command="{Binding LoadDataCommand}"/>
+        </HorizontalStackLayout>
+
+        <!-- Status -->
+        <Label Grid.Row="1" Text="{Binding StatusMessage}" Margin="10"/>
+
+        <!-- Sekcje danych -->
+        <ScrollView Grid.Row="2">
+            <StackLayout>
+                <!-- Książki -->
+                <CollectionView ItemsSource="{Binding Books}" 
+                              IsVisible="{Binding IsBooksVisible}">
+                    <!-- ItemTemplate -->
+                </CollectionView>
+
+                <!-- Kategorie -->
+                <CollectionView ItemsSource="{Binding Categories}" 
+                              IsVisible="{Binding IsCategoriesVisible}">
+                    <!-- ItemTemplate -->
+                </CollectionView>
+
+                <!-- Członkowie -->
+                <CollectionView ItemsSource="{Binding Members}" 
+                              IsVisible="{Binding IsMembersVisible}">
+                    <!-- ItemTemplate -->
+                </CollectionView>
+
+                <!-- Wypożyczenia -->
+                <CollectionView ItemsSource="{Binding Borrows}" 
+                              IsVisible="{Binding IsBorrowsVisible}">
+                    <!-- ItemTemplate -->
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Indicator ładowania -->
+        <ActivityIndicator Grid.RowSpan="3" 
+                         IsRunning="{Binding IsLoading}"
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"/>
+    </Grid>
+</ContentPage>
